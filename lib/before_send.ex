@@ -42,9 +42,9 @@ defmodule AbsintheCache.BeforeSend do
 
         case do_not_cache? or has_graphql_errors?(blueprint) do
           true ->
-            IO.puts("\n\n\n\n\n\n DO NOT CACHE: ")
-            IO.inspect(do_not_cache?)
-            IO.puts("\n\n\n\n\n\n")
+            # IO.puts("\n\n\n\n\n\n DO NOT CACHE: ")
+            # IO.inspect(do_not_cache?)
+            # IO.puts("\n\n\n\n\n\n")
             :ok
 
           false ->
@@ -56,9 +56,9 @@ defmodule AbsintheCache.BeforeSend do
 
       defp cache_result(queries, blueprint) do
         all_queries_cacheable? = queries |> Enum.all?(&Enum.member?(@cached_queries, &1))
-        IO.puts("\n\n\n\n\n\n Cacheable queries: ")
-        IO.inspect(all_queries_cacheable?)
-        IO.puts("\n\n\n\n\n\n")
+        # IO.puts("\n\n\n\n\n\n Cacheable queries: ")
+        # IO.inspect(all_queries_cacheable?)
+        # IO.puts("\n\n\n\n\n\n")
 
         if all_queries_cacheable? do
           AbsintheCache.store(
