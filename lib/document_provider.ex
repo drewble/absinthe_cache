@@ -103,11 +103,11 @@ defmodule AbsintheCache.DocumentProvider do
 
           case AbsintheCache.get(cache_key) do
             nil ->
-              IO.puts("\n\n\n\n\nCACHE MISS\n\n\n\n\n\n")
+              IO.puts("\n\n\n\n\nCACHE MISS with cache_key #{cache_key}\n\n\n\n\n\n")
               {:ok, bp_root}
 
             result ->
-              IO.puts("\n\n\n\n\nCACHE HIT\n\n\n\n\n\n")
+              IO.puts("\n\n\n\n\nCACHE HIT with cache_key #{cache_key}\n\n\n\n\n\n")
               # Storing it again `touch`es it and the TTL timer is restarted.
               # This can lead to infinite storing the same value
               Process.put(:do_not_cache_query, true)
