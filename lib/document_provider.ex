@@ -25,17 +25,19 @@ defmodule AbsintheCache.DocumentProvider do
     quote location: :keep, bind_quoted: [opts: opts] do
       @behaviour Absinthe.Plug.DocumentProvider
 
+      @module __MODULE__
+
       @doc false
       @impl true
       def pipeline(%Absinthe.Plug.Request.Query{pipeline: pipeline}) do
         pipeline
         |> Absinthe.Pipeline.insert_before(
           Absinthe.Phase.Document.Execution.Resolution,
-          __MODULE__.CacheDocument
+          @module.CacheDocument
         )
         |> Absinthe.Pipeline.insert_after(
           Absinthe.Phase.Document.Result,
-          __MODULE__.Idempotent
+          @module.Idempotent
         )
       end
 
@@ -116,7 +118,7 @@ defmodule AbsintheCache.DocumentProvider do
               # This can lead to infinite storing the same value
               Process.put(:do_not_cache_query, true)
 
-              {:jump, %{bp_root | result: result}, __MODULE__.Idempotent}
+              {:jump, %{bp_root | result: result}, @module.Idempotent}
           end
         end
 
