@@ -50,6 +50,9 @@ defmodule AbsintheCache.BeforeSend do
 
       defp cache_result(queries, blueprint) do
         all_queries_cacheable? = queries |> Enum.all?(&Enum.member?(@cached_queries, &1))
+        IO.puts("\n\n\n\n\n\n Cacheable queries: ")
+        IO.inspect(all_queries_cacheable?)
+        IO.puts("\n\n\n\n\n\n")
 
         if all_queries_cacheable? do
           AbsintheCache.store(
