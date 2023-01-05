@@ -42,7 +42,9 @@ defmodule AbsintheCache.BeforeSend do
 
         case do_not_cache? or has_graphql_errors?(blueprint) do
           true ->
-            IO.puts("\n\n\n\n\n\n DO NOT CACHE: TRUE \n\n\n\n\n\n")
+            IO.puts("\n\n\n\n\n\n DO NOT CACHE: ")
+            IO.inspect(do_not_cache?)
+            IO.puts("\n\n\n\n\n\n")
             :ok
 
           false ->
