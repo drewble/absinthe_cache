@@ -108,6 +108,7 @@ defmodule AbsintheCache.DocumentProvider do
             result ->
               # Storing it again `touch`es it and the TTL timer is restarted.
               # This can lead to infinite storing the same value
+              IO.puts("I AM HERE")
               Process.put(:do_not_cache_query, true)
 
               {:jump, %{bp_root | result: result},
