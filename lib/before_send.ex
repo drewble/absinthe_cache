@@ -41,8 +41,12 @@ defmodule AbsintheCache.BeforeSend do
         do_not_cache? = is_nil(Process.get(:do_not_cache_query))
 
         case do_not_cache? or has_graphql_errors?(blueprint) do
-          true -> :ok
-          false -> cache_result(queries, blueprint)
+          true ->
+            IO.puts("\n\n\n\n\n\n DO NOT CACHE: TRUE \n\n\n\n\n\n")
+            :ok
+
+          false ->
+            cache_result(queries, blueprint)
         end
 
         conn
